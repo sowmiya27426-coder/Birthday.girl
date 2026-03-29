@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Thikssha 🎂</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #ffdde1, #fbc2eb);
+  color: #fff;
+  overflow-x: hidden;
+}
+
+section {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 3rem;
+  animation: fadeIn 2s ease-in-out;
+}
+
+.hero p {
+  font-size: 1.2rem;
+}
+
+img {
+  width: 90%;
+  max-width: 300px;
+  border-radius: 20px;
+  margin-top: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.card {
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 400px;
+  box-shadow: 0 0 20px rgba(255,255,255,0.3);
+  animation: fadeIn 1.5s ease;
+}
+
+button {
+  padding: 12px 25px;
+  border-radius: 30px;
+  border: none;
+  background: white;
+  color: #ff6f91;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px white;
+}
+
+.quotes {
+  max-height: 200px;
+  overflow-y: auto;
+  text-align: left;
+}
+
+footer {
+  padding: 20px;
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.heart {
+  position: fixed;
+  color: pink;
+  animation: float 5s linear infinite;
+}
+
+@keyframes float {
+  0% {transform: translateY(100vh); opacity:1;}
+  100% {transform: translateY(-10vh); opacity:0;}
+}
+
+@keyframes fadeIn {
+  from {opacity:0; transform: translateY(20px);} 
+  to {opacity:1; transform: translateY(0);} 
+}
+</style>
+</head>
+
+<body>
+
+<audio autoplay loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<canvas id="confetti"></canvas>
+
+<section class="hero">
+  <h1>Happy Birthday Thikssha 🎂</h1>
+  <p>A magical day just for you 💖</p>
+  <img src="WhatsApp Image 2026-03-28 at 12.32.05 PM.jpeg">
+</section>
+
+<section class="card">
+  <h2>💌 Message</h2>
+  <p>You are truly special. May your life be filled with endless happiness, love, and success ✨</p>
+</section>
+
+<section class="card">
+  <h2>✨ Birthday Quotes</h2>
+  <div class="quotes">
+    <p>✨ Shine brighter every year</p>
+    <p>✨ Happiness looks beautiful on you</p>
+    <p>✨ Celebrate your amazing journey</p>
+    <p>✨ Dreams will come true</p>
+    <p>✨ You deserve the world</p>
+    <p>✨ Keep smiling always</p>
+  </div>
+</section>
+
+<section class="card">
+  <h2>🎉 Celebrate</h2>
+  <button onclick="startConfetti()">Celebrate 🎉</button>
+</section>
+
+<section class="card">
+  <h2>📸 Memories</h2>
+  <p>More memories coming soon...</p>
+</section>
+
+<footer>
+  Made with love ❤️
+</footer>
+
+<script>
+const canvas = document.getElementById('confetti');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let confetti = [];
+
+function createConfetti() {
+  return {
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height - canvas.height,
+    size: Math.random() * 6 + 4,
+    speed: Math.random() * 3 + 2,
+    color: `hsl(${Math.random()*360},100%,50%)`
+  };
+}
+
+function startConfetti() {
+  confetti = [];
+  for(let i=0;i<200;i++) confetti.push(createConfetti());
+  animate();
+}
+
+function animate() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  confetti.forEach((c,i)=>{
+    ctx.fillStyle = c.color;
+    ctx.fillRect(c.x,c.y,c.size,c.size);
+    c.y += c.speed;
+    if(c.y>canvas.height){ confetti[i]=createConfetti(); confetti[i].y=0; }
+  });
+  requestAnimationFrame(animate);
+}
+
+// floating hearts
+setInterval(()=>{
+  const heart = document.createElement('div');
+  heart.className='heart';
+  heart.innerHTML='❤️';
+  heart.style.left=Math.random()*100+'vw';
+  heart.style.fontSize=Math.random()*20+10+'px';
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),5000);
+},300);
+</script>
+
+</body>
+</html>
